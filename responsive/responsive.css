@@ -1,5 +1,6 @@
 /* Make webpages responsive to size*/
 
+/* Smallest screen: Block Chain*/
 @media screen and (max-width: 600px) {
 	.software {
 		width: 490px;
@@ -8,6 +9,7 @@
 	}
 }
 
+/* 600 ~ 800: Software */
 @media screen and (min-width: 601px) and (max-width: 800px) {
 	.software {
 		width: 710px;
@@ -16,6 +18,7 @@
 	}
 }
 
+/* 800 ~ 1000: Software Engineers */
 @media screen and (min-width: 801px) and (max-width: 1000px) {
 	.software {
 		width: 330px;
@@ -24,6 +27,7 @@
 	}
 }
 
+/* 1000 ~ 1200:  Building Engineers */
 @media screen and (min-width: 1001px) and (max-width: 1200px) {
 	.software {
 		width: 435px;
@@ -32,6 +36,7 @@
 	}
 }
 
+/* Biggest screen:  Aircraft Engineers */
 @media screen and (min-width: 1201px) {
 	.software {
 		width: 450px;

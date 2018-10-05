@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>We Do</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+<h1 id="title">We Do</h1>
+
+<video src="https://www.cs.tufts.edu/comp/20/wedo.mp4" id="wedo" controls></video>
+<div id="lyrics"></div>
+
+<script>
+	var lyrics = document.getElementById("lyrics");
+	var video = document.getElementById("wedo");
+	
+	video.addEventListener("timeupdate", function() {				
+		if (video.currentTime >= 4 && video.currentTime < 6) {
+			lyrics.innerHTML = "<h2>Who controls the British crown?</h2s>";
+		}
+		else if (video.currentTime > 6 && video.currentTime < 8) {
+			lyrics.innerHTML = "<h2>Who keeps the metric system down?</h2>";
+		}
+		else if (video.currentTime > 8 && video.currentTime < 12) {
+			lyrics.innerHTML = "<h2>We do, we do!</h2>";
+		}
+		else if (video.currentTime > 12.5 && video.currentTime < 14.5) {
+			lyrics.innerHTML = "<h2>Who keeps Atlantis off the maps?</h2>";
+		}
+		else if (video.currentTime > 14.5 && video.currentTime < 16.5) {
+			lyrics.innerHTML = "<h2>Who keeps the Martians under wraps?</h2>";
+		}
+		else if (video.currentTime > 16 && video.currentTime < 20) {
+			lyrics.innerHTML = "<h2>We do, we do!</h2>";
+		}
+		else if (video.currentTime > 21 && video.currentTime < 25) {
+			lyrics.innerHTML = "<h2>Who holds back the electric car?</h2>";
+		}
+		else if (video.currentTime > 25 && video.currentTime < 29) {
+			lyrics.innerHTML = "<h2>Who makes Steve Guttenberg a star?</h2>";
+		}
+		else if (video.currentTime > 29 && video.currentTime < 33) {
+			lyrics.innerHTML = "<h2>We do, we do!</h2>";
+		}
+		else if (video.currentTime > 33 && video.currentTime < 35.5) {
+			lyrics.innerHTML = "<h2>Who robs cavefish of their sight?</h2>";
+		}
+		else if (video.currentTime > 35.5 && video.currentTime < 38) {
+			lyrics.innerHTML = "<h2>Who rigs every Oscar night?</h2>";
+		}
+		else if (video.currentTime > 38) {
+			lyrics.innerHTML = "<h2>We do!</h2>";
+		}
+
+	}, false);
+</script>
+</body>
+</html>	
