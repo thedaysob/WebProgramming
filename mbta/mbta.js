@@ -118,11 +118,11 @@ function initMap() {
         request.onreadystatechange = function() {
         	if (request.readyState == 4 && request.status == 200) {
         		theData = request.responseText;
-            	data = JSON.parse(theData);
-            	if (data.data.length() == 0)
+            	source = JSON.parse(theData);
+            	if (source.data.length == 0)
             		schedule = schedule + 'Not available at the moment';
             	else {
-            		data.data.forEach(function(element) {
+            		source.data.forEach(function(element) {
                 		var arrival = element.attributes.arrival_time;
                 		var departure = element.attributes.departure_time;
                 		if (arrival == null)
