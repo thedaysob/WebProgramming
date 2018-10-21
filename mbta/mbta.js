@@ -119,7 +119,7 @@ function initMap() {
         	if (request.readyState == 4 && request.status == 200) {
         		theData = request.responseText;
             	data = JSON.parse(theData);
-            	if (data.data.length == 0)
+            	if (data.data.length() == 0)
             		schedule = schedule + 'Not available at the moment';
             	else {
             		data.data.forEach(function(element) {
