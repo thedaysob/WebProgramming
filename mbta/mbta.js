@@ -98,7 +98,7 @@ function initMap() {
             stop_name: 'Braintree'
         }
     ];
-    
+
     /*PUT STATION ON GOOGLE MAP*/
     var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
     var requestURL = 'https://chicken-of-the-sea.herokuapp.com/redline/schedule.json?stop_id=place-';
@@ -143,4 +143,41 @@ function initMap() {
         request.send();
     });
 
+    var AlewifetoJFK = [];
+    var JFKtoAshmont = [];
+    var JFKtoBrain = [stations[12].position];
+
+    for (i = 0; i < 13; i++)
+    	AlewifetoJFK[i] = stations[i].position;
+
+    for (i = 0; i < 5; i++)
+    	JFKtoAshmont[i] = stations[i+12].position;
+
+    for (i = 1; i < 6; i++)
+    	JFKtoBrain[i] = stations[i+16].position;
+
+    var JFKPath = new google.maps.Polyline({
+        path: AlewifetoJFK,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    var AshmontPath = new google.maps.Polyline({
+        path: JFKtoAshmont,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    var BrainPath = new google.maps.Polyline({
+        path: JFKtoBrain,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    JFKPath.setMap(map);
+    AshmontPath.setMap(map);
+    BrainPath.setMap(map);
 }
