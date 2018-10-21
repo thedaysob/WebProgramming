@@ -98,4 +98,49 @@ function initMap() {
             stop_name: 'Braintree'
         }
     ];
+    
+    /*PUT STATION ON GOOGLE MAP*/
+    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+    var requestURL = 'https://chicken-of-the-sea.herokuapp.com/redline/schedule.json?stop_id=place-';
+
+    stations.forEach(function(station) {
+        var marker = new google.maps.Marker({
+            position: station.position,
+            icon: iconBase + 'rail.png',
+            map: map
+        });
+        
+        var request = new XMLHttpRequest();
+        request.open('GET', requestURL + station.stop_id, true);
+        var schedule = '<h1>' + station.stop_name + '</h1>';
+        request.onreadystatechange = function() {
+        	if (request.readyState == 4 && request.status == 200) {
+        		theData = request.responseText;
+            	source = JSON.parse(theData);
+            	if (source.data.length == 0)
+            		schedule = schedule + 'Not available at the moment';
+            	else {
+            		source.data.forEach(function(element) {
+                		var arrival = element.attributes.arrival_time;
+                		var departure = element.attributes.departure_time;
+                		if (arrival == null)
+                			arrival = 'Not Available';
+                		if (departure == null)
+                			departure = 'Not Available';
+                		schedule = schedule + '<p>' + 'Arriving: ' + arrival + '<br />' + 'Departure: ' + departure + '<br />' + '</p>';   
+            		});
+            	}
+
+        		var infoWindow = new google.maps.InfoWindow({
+            		content: schedule
+        		});
+
+        		marker.addListener('click', function() {
+            		infoWindow.open(map, marker)
+        		});
+            }
+        };
+        request.send();
+    });
+
 }
