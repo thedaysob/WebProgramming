@@ -180,4 +180,46 @@ function initMap() {
     JFKPath.setMap(map);
     AshmontPath.setMap(map);
     BrainPath.setMap(map);
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                icon: iconBase + 'man.png',
+                map: map
+            });
+            map.setCenter(marker.position);
+
+            var closest_station = {distance: undefined, station: undefined, position: undefined};
+            stations.forEach(function(station) {
+                distance = google.maps.geometry.spherical.computeDistanceBetween(marker.position, station.position);
+                if (closest_station.distance == undefined || distance < closest_station.distance) {
+                	closest_station.position = station.position;
+                    closest_station.distance = distance;
+                    closest_station.station = station.stop_name;
+                }
+            });
+
+            infoWindow = new google.maps.InfoWindow({
+                content: '<p>' + 'Closest Station: ' + closest_station.station + '<br />' + (closest_station.distance/1609.344) + ' miles away' + '</p>'
+            })
+            marker.addListener('click',function() {
+                infoWindow.open(map, marker)
+            });
+            var pathToStation = new google.maps.Polyline({
+            	path: [marker.position, closest_station.position],
+            	geodesic: true,
+            	strokeColor: '#FF0000',
+            	strokeOpacity: 1.0,
+            	strokeWeight: 2
+            });
+            pathToStation.setMap(map);
+        }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
 }
