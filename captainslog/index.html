@@ -11,7 +11,7 @@
         $(document).ready(function reload() {
             elem = document.getElementById("log");
             output = "";
-            for (var i = 0; i < localStorage.length; i++) {
+            for (var i = localStorage.length - 1; i >= 0; i--) {
                 output = output + "<p>" + localStorage.getItem(localStorage.key(i)) + "</p>";
             }
             elem.innerHTML = output;
@@ -27,8 +27,7 @@
                 localStorage[time] = currentOutput;
 
                 previousMessage = elem.innerHTML;
-                // finalOutput =  previousMessage + "<p></br></p>" + currentOutput ;
-                finalOutput =  "<p>" + previousMessage + "</p>" + "<p>" + currentOutput + "</p>";
+                finalOutput =  "<p>" + currentOutput + "</p>" + "<p>" + previousMessage + "</p>";
                 elem.innerHTML = finalOutput;
             }
         });
