@@ -102,7 +102,6 @@ function initMap() {
     /*PUT STATION ON GOOGLE MAP*/
     var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
     var API_KEY =  '&page[limit]=10&page[offset]=0&sort=departure_time&api_key=4773f645f831489c9566a465eb8faa3d';
-    //var requestURL = 'https://chicken-of-the-sea.herokuapp.com/redline/schedule.json?stop_id=place-';
     var requestURL = 'https://api-v3.mbta.com/predictions?filter[route]=Red&filter[stop]=';
 
     stations.forEach(function(station) {
@@ -121,7 +120,7 @@ function initMap() {
             	source = JSON.parse(theData);
 
             	if (source == null)
-            		schedule = scheuld + 'Not available at the moment';
+            		schedule = schedule + 'Not available at the moment';
             	else if (source.data.length == 0)
             		schedule = schedule + 'Not available at the moment';
             	else {
