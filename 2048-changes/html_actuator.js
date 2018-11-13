@@ -40,22 +40,6 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
       var request = new XMLHttpRequest();
       request.open('POST', url + '/submit', true);
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      request.onreadystatechange = function() {
-        if (request.readyState == 4 && request.status == 200) {
-          var username = request.responseText;
-          // if (username != '500') {
-          //   var getScore = new XMLHttpRequest();
-          //   getScore.open('GET', url + '/scores.json', true);
-          //   getScore.onreadystatechange = function() {
-          //     if (getScore.readyState == 4 && getScore.status == 200) {
-          //       // var Data = request.responseText;
-          //       // var scores = JSON.parse(Data);
-          //     }
-          //   };
-          //   getScore.send({'username':username});
-          // }
-        }
-      };
       var username = prompt("Please enter your username", "username");
       var score = this.score;
       var grid = this.grid;
