@@ -15,26 +15,59 @@
 	<p>I was hired to find security risks within Samsam Dirie's 2048 Score Table through various attacking methods.</p>
 
 	<h2 class="topic">Methodology</h2>
-	<p></p>
+	<p>My first test involved using xss with curl. I attempted to send an alert to the index page of Samsam's 2048 score board.<br>
+	My second test was me just analyzing her code and using her website.
+	My third test was injection with query string. I attempted to access all the data within her database.</p>
 
 	<h2 class="topic">Abstract of Findings</h2>
+	<p>From attacking Samsam's website, I have discovered few problems within her code. Her first problem is that her code does little to prvent XSS. Her second problem is that her /scores.json query string is broken. And lasty her third problem is that her code allows data injection.</p> 
 
 	<h2 class="topic">Issues Found</h2>
+
 	<div class="issue">
+		<h3>First issue: XSS</h3>
 		<ul>
-			<li>Issue</li>
-			<li>Location</li>
-			<li>Severity</li>
-			<li>Proof</li>
+			<li>Issue: Prone to XSS</li>
+			<li>Location: The issue was located within the post method (/submit)</li>
+			<li>Severity: High. If wanted the hacker could completely destroy the website as any javascript could be executed.</li>
+			<li>Description of issue: I found this vulnebility by looking at Samsam's code. I realized that she does not check client inputs.</li> 
+			<li>Resolution: Before posting the data, you could get rid of special characters such as <></li>
+			<li>Proof:</li>
+			<img class="proof" src="XSSproof.PNG" alt="XSS proof">
 		</ul>
 	</div>
 
-	<h2 class="topic">Resolution</h2>
+	<div class="issue">
+		<h3>Second issue: Get /score.json malfunction</h3>
+		<ul>
+			<li>Issue: Get /score.json malfunction</li>
+			<li>Location: The issue was located within the get method (/scores.json) when given a query string</li>
+			<li>Severity: Medium. When does client wants a dataset of a specific user, the client will not be able to.</li>
+			<li>Description of issue: When you use query string to request a dataset of a specific user, the website crashes and needs to be rebuilt.</li>
+			<li>Resolution: I believe that she has extra headers that are not necessary. She can get rid of those headers and just get the cors library.</li>
+			<li>Proof:</li>
+			<img class="proof" src="InjectionProof2.PNG" alt="Injection proof">
+		</ul>
+	</div>
 
+	<div class="issue">
+		<h3>Third issue: Database Injection</h3>
+		<ul>
+			<li>Issue: Prone to Database Injection</li>
+			<li>Location: The issue was located within the get method (/scores.json)</li>
+			<li>Severity: Medium. Had her /scores.json worked properly, the hacker could easily access data that is not meant for the public eye.</li>
+			<li>Description of issue: Upon attempting to receive all data within her MongoDB, her website broke. However, had she implemented the /scores.json query string correctly, it would have been prone to database injection. I found this vulnebility by analyzing her code. I realized that she did little to check if the client input in the query string does not include special characters.</li>
+			<li>Resolution: Add special character constraints when using the query string</li>
+			<li>Proof:</li>
+			<img class="proof" src="InjectionProof.PNG" alt="Injection proof">
+		</ul>
+	</div>
 	<h2 class="topic">Conclusion</h2>
+	<p> With little adjustments, I believe that Samsam's 2048 Score Borad will function appropriately. However, her security of her data and her website seems to be weak. It definitely needs more security that is not even stated within this report.</p>
 
 	<h2 class="topic">References</h2>
-
+	<p>https://tuftsdev.github.io/WebProgramming/notes/web_security.html</p>
+	<p>https://www.owasp.org/index.php/Top_10_2013-Top_10</p>
 </body>
 
 </html>
